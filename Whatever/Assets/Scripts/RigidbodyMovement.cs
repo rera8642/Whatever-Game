@@ -9,6 +9,7 @@ public class RigidbodyMovement : MonoBehaviour
     [SerializeField] private Transform orientation;
     [SerializeField] private Rigidbody PlayerBody;
     [SerializeField] private WallRunning wallRun;
+    [SerializeField] private GrapplingGun grappleGun;
     [Space]
     [SerializeField] private float speed;
     [SerializeField] private float walkSpeed;
@@ -19,6 +20,8 @@ public class RigidbodyMovement : MonoBehaviour
     [SerializeField] private float groundDrag;
     [SerializeField] private float airDrag;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float grappleJumpForce;
+    [SerializeField] private float grappleForwardForce;
     [Space]
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
@@ -29,6 +32,10 @@ public class RigidbodyMovement : MonoBehaviour
     private float airMultiplier = .9f;
     private float wallMultiplier = 3f;
     private float playerHeight = 2f;
+
+    private float gjForce;
+    private float gfForce;
+
     private Vector3 movementDirection;
     private Vector3 slopeMoveDirection;
     private bool grounded = false;
@@ -40,14 +47,26 @@ public class RigidbodyMovement : MonoBehaviour
         verticalMovement = Input.GetAxisRaw("Vertical");
         movementDirection = orientation.forward * verticalMovement + orientation.right * horizontalMovement;
         grounded = Physics.CheckSphere(FeetTransform.position, 0.3f, FloorMask);
+        if (grounded)
+        {
+            gjForce = grappleJumpForce;
+            gfForce = grappleForwardForce;
+        }
 
         ControlSpeed();
 
         ControlDrag();
 
-        if (Input.GetKeyDown(jumpKey) && grounded)
+        if (Input.GetKeyDown(jumpKey))
         {
-            Jump();
+            if (grappleGun.IsGrappling())
+            {
+                GrappleJump();
+                grappleGun.StopGrapple();
+            } else if (grounded)
+            {
+                Jump();
+            }
         }
 
         slopeMoveDirection = Vector3.ProjectOnPlane(movementDirection, slopeHit.normal);
@@ -108,6 +127,17 @@ public class RigidbodyMovement : MonoBehaviour
     {
         PlayerBody.velocity = new Vector3(PlayerBody.velocity.x, 0f, PlayerBody.velocity.z);
         PlayerBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void GrappleJump()
+    {
+        if (PlayerBody.velocity.y < 0f)
+        {
+            PlayerBody.velocity = new Vector3(PlayerBody.velocity.x, 0f, PlayerBody.velocity.z);
+        }
+        PlayerBody.AddForce(transform.up * gjForce + orientation.forward * gfForce, ForceMode.Impulse);
+        gjForce *= .8f;
+        gfForce *= .8f;
     }
 
     private bool OnSlope()

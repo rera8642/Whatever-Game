@@ -12,6 +12,7 @@ public class WallRunning : MonoBehaviour
     [SerializeField] private float wallJumpForce;
     [Header("Camera")]
     [SerializeField] private Camera cam;
+    [SerializeField] private GrapplingGun grappleGun;
     [SerializeField] private float fov;
     [SerializeField] private float wallRunfov;
     [SerializeField] private float wallRunfovTime;
@@ -80,7 +81,7 @@ public class WallRunning : MonoBehaviour
             tilt = Mathf.Lerp(tilt, camTilt, camTiltTime * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(jumpKey))
+        if (Input.GetKeyDown(jumpKey) && !grappleGun.IsGrappling())
         {
             if (wallLeft)
             {
