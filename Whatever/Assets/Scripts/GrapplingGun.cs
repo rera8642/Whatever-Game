@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GrapplingGun : MonoBehaviour
 {
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private GameObject img;
     [SerializeField] private float maxDistance = 100f;
     [SerializeField] private float minDistance = 1f;
 
@@ -18,8 +20,13 @@ public class GrapplingGun : MonoBehaviour
 
     private void Update()
     {
-        
-
+        if (Physics.Raycast(cam.position, cam.forward, maxDistance))
+        {
+            img.GetComponent<Image>().color = new Color32(0, 255, 0, 255);
+        } else
+        {
+            img.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        }
         if (Input.GetMouseButtonDown(1))
         {
             StartGrapple();

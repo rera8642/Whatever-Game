@@ -136,8 +136,8 @@ public class RigidbodyMovement : MonoBehaviour
             PlayerBody.velocity = new Vector3(PlayerBody.velocity.x, 0f, PlayerBody.velocity.z);
         }
         PlayerBody.AddForce(transform.up * gjForce + orientation.forward * gfForce, ForceMode.Impulse);
-        gjForce *= .8f;
-        gfForce *= .8f;
+        gjForce *= .95f;
+        gfForce *= .95f;
     }
 
     private bool OnSlope()
