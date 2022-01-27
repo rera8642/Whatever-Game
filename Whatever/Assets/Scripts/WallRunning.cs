@@ -21,6 +21,7 @@ public class WallRunning : MonoBehaviour
     [Space]
     [SerializeField] private Rigidbody PlayerBody;
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] private LayerMask wallMask;
 
     public float tilt { get; private set; }
     public bool isWallRun { get; private set; }
@@ -34,6 +35,8 @@ public class WallRunning : MonoBehaviour
     private void Update()
     {
         CheckWall();
+        //Debug.Log("WallLeft " + wallLeft);
+        //Debug.Log("WallRight " + wallRight);
 
         if (CanWallRun())
         {
@@ -55,8 +58,8 @@ public class WallRunning : MonoBehaviour
 
     private void CheckWall()
     {
-        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallHit, wallDistance);
-        wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallHit, wallDistance);
+        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallHit, wallDistance, wallMask);
+        wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallHit, wallDistance, wallMask);
     }
 
     private bool CanWallRun()

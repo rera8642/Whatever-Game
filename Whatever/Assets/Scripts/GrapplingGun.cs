@@ -1,7 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GrapplingGun : MonoBehaviour
 {
@@ -16,7 +17,9 @@ public class GrapplingGun : MonoBehaviour
     public Transform player;
 
     private Vector3 grapplePoint;
-    private SpringJoint joint;
+    public SpringJoint joint;
+    public TextMeshProUGUI ammoDisplay;
+
 
     private void Update()
     {
@@ -33,6 +36,13 @@ public class GrapplingGun : MonoBehaviour
         } else if (Input.GetMouseButtonUp(1))
         {
             StopGrapple();
+        } else if (!Input.GetMouseButton(1))
+        {
+            StopGrapple();
+        }
+        if (ammoDisplay != null)
+        {
+            ammoDisplay.SetText("∞ / ∞");
         }
     }
 
@@ -80,7 +90,10 @@ public class GrapplingGun : MonoBehaviour
     public void StopGrapple()
     {
         lineRenderer.positionCount = 0;
-        Destroy(joint);
+        if (joint != null)
+        {
+            Destroy(joint);
+        }
     }
 
     public bool IsGrappling()

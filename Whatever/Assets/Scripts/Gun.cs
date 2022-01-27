@@ -30,6 +30,8 @@ public class Gun : MonoBehaviour
     public int bulletsPerTap;
 
     public bool allowButtonHold;
+    public int mouseButton = 0;
+    public bool allowReload = true;
 
     private int bulletsLeft;
     private int bulletsShot;
@@ -57,22 +59,22 @@ public class Gun : MonoBehaviour
     {
         if (allowButtonHold)
         {
-            shooting = Input.GetMouseButton(0);
+            shooting = Input.GetMouseButton(mouseButton);
         } else
         {
-            shooting = Input.GetMouseButtonDown(0);
+            shooting = Input.GetMouseButtonDown(mouseButton);
         }
-
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magSize && !reloading)
+        if (allowReload)
         {
-            Reload();
+            if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magSize && !reloading)
+            {
+                Reload();
+            }
         }
-
         if (readyToShoot && shooting && !reloading && bulletsLeft <= 0)
         {
             Reload();
         }
-
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
             bulletsShot = 0;
