@@ -42,4 +42,5 @@ public class FlameThrower : MonoBehaviour
             effect = null;
         }
     }
+
 }

@@ -153,4 +153,5 @@ public class Gun : MonoBehaviour
         bulletsLeft = magSize;
         reloading = false;
     }
+
 }

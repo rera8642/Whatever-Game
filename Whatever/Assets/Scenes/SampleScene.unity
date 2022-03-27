@@ -2711,6 +2711,7 @@ GameObject:
   - component: {fileID: 509351966}
   - component: {fileID: 509351965}
   - component: {fileID: 509351968}
+  - component: {fileID: 509351970}
   - component: {fileID: 509351969}
   m_Layer: 7
   m_Name: Grapple Gun
@@ -2918,6 +2919,22 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &509351970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509351963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec1a02828427eb418a44bd79d53659b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grappleGun: {fileID: 509351968}
+  flameThrower: {fileID: 0}
+  iceGreandeLauncher: {fileID: 0}
+  type: 1
 --- !u!1 &537888230
 GameObject:
   m_ObjectHideFlags: 0
@@ -3217,6 +3234,7 @@ GameObject:
   - component: {fileID: 569560954}
   - component: {fileID: 569560953}
   - component: {fileID: 569560952}
+  - component: {fileID: 569560956}
   m_Layer: 7
   m_Name: Flamethrower
   m_TagString: Untagged
@@ -3232,7 +3250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569560950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.012, y: 0.028, z: 0}
+  m_LocalPosition: {x: -0.29, y: 0.028, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 560570270}
@@ -3318,6 +3336,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569560950}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &569560956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569560950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec1a02828427eb418a44bd79d53659b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grappleGun: {fileID: 0}
+  flameThrower: {fileID: 569560952}
+  iceGreandeLauncher: {fileID: 0}
+  type: 2
 --- !u!1 &576483615
 GameObject:
   m_ObjectHideFlags: 0
@@ -6050,7 +6084,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070380178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.791, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1847373872}
@@ -6071,11 +6105,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a982d9d0a1d424e41ac39e470b183b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grappleGun: {fileID: 509351968}
-  flameThrower: {fileID: 569560952}
-  iceGreandeLauncher: {fileID: 1934830420}
+  grappleGun: {fileID: 509351970}
+  flameThrower: {fileID: 569560956}
+  iceGreandeLauncher: {fileID: 1934830424}
   currentSelected: 0
   maxSelected: 3
+  total: 6
   swapKey: 113
 --- !u!1 &1086597244
 GameObject:
@@ -7105,13 +7140,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1298409080}
-  m_LocalRotation: {x: -0, y: -0, z: -0.41595533, w: 0.9093851}
-  m_LocalPosition: {x: -0.46100003, y: -0.55599993, z: 0}
-  m_LocalScale: {x: 0.43810478, y: 0.43810478, z: 0.43810478}
+  m_LocalRotation: {x: -0, y: -0, z: 0.32624272, w: 0.9452861}
+  m_LocalPosition: {x: 0.4, y: -0.83, z: 0}
+  m_LocalScale: {x: 0.43810478, y: 0.95116925, z: 0.43810478}
   m_Children: []
   m_Father: {fileID: 569560951}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -49.159}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 38.082}
 --- !u!136 &1298409082
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9887,6 +9922,7 @@ GameObject:
   - component: {fileID: 1934830422}
   - component: {fileID: 1934830421}
   - component: {fileID: 1934830420}
+  - component: {fileID: 1934830424}
   m_Layer: 7
   m_Name: Ice Grenade Launcher
   m_TagString: Untagged
@@ -9902,7 +9938,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934830418}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.09, y: 0.079, z: 0.297}
+  m_LocalPosition: {x: -0.301, y: 0.079, z: 0.297}
   m_LocalScale: {x: 0.1, y: 0.20422001, z: 0.1}
   m_Children:
   - {fileID: 1361036211}
@@ -10008,6 +10044,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934830418}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1934830424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934830418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec1a02828427eb418a44bd79d53659b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grappleGun: {fileID: 0}
+  flameThrower: {fileID: 0}
+  iceGreandeLauncher: {fileID: 1934830420}
+  type: 3
 --- !u!1 &1969308063
 GameObject:
   m_ObjectHideFlags: 0

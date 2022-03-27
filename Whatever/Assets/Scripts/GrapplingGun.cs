@@ -96,6 +96,7 @@ public class GrapplingGun : MonoBehaviour
         }
     }
 
+
     public bool IsGrappling()
     {
         return joint != null;

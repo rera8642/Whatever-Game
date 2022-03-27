@@ -4,74 +4,111 @@ using UnityEngine;
 
 public class SwitchSidearm : MonoBehaviour
 {
-    [SerializeField] private GrapplingGun grappleGun;
-    [SerializeField] private FlameThrower flameThrower;
-    [SerializeField] private Gun iceGreandeLauncher;
+    [SerializeField] private Sidearm grappleGun;
+    [SerializeField] private Sidearm flameThrower;
+    [SerializeField] private Sidearm iceGreandeLauncher;
 
     [SerializeField] private int currentSelected = 0;
     [SerializeField] private int maxSelected = 3;
+    [SerializeField] private int total = 6;
     [SerializeField] private KeyCode swapKey = KeyCode.Q;
 
-    private GameObject[] objectList;
+    private Sidearm[] objectList;
     private bool allowInvoke = true;
+
+    //public KeyCode debugKey = KeyCode.Z;
+    //public KeyCode debugKey2 = KeyCode.X;
 
     private void Start()
     {
-        objectList = new GameObject[maxSelected];
-        objectList[0] = grappleGun.gameObject;
-        objectList[1] = flameThrower.gameObject;
-        objectList[2] = iceGreandeLauncher.gameObject;
+        objectList = new Sidearm[total];
+        objectList[0] = grappleGun;
+        objectList[1] = flameThrower;
+        objectList[2] = iceGreandeLauncher;
         currentSelected = 0;
-        foreach (GameObject obj in objectList)
+        for(int i = 0; i < maxSelected; i++)
         {
-            obj.SetActive(false);
+            objectList[i].gameObject.SetActive(false);
         }
         //iceGreandeLauncher.ammoDisplay.gameObject.SetActive(false);
-        objectList[currentSelected].SetActive(true);
+        objectList[currentSelected].gameObject.SetActive(true);
     }
 
     private void Update()
     {
-        
-        if (Input.GetKeyDown(swapKey) && allowInvoke)
+        /*
+        if (Input.GetKeyDown(debugKey) && allowInvoke)
         {
             allowInvoke = false;
-            //iceGreandeLauncher.ammoDisplay.gameObject.SetActive(false);
-            switch (currentSelected)
-            {
-                case 0:
-                    grappleGun.StopGrapple();
-                    //Destroy(grappleGun.joint);
-                    break;
-                case 1:
-                    flameThrower.EndFlameThrower();
-                    break;
-                case 2:
-                    break;
-            }
-            currentSelected++;
-
-            if (currentSelected >= maxSelected)
-            {
-                currentSelected = 0;
-            }
-
+            unlockWeapon(2);
             Invoke("setAct", 0.2f);
-            
+        } 
+        else if (Input.GetKeyDown(debugKey2) && allowInvoke)
+        {
+            allowInvoke = false;
+            unlockWeapon(3);
+            Invoke("setAct", 0.2f);
+        } 
+        else*/ if (Input.GetKeyDown(swapKey) && allowInvoke)
+        {
+            if (maxSelected > 1)
+            {
+                allowInvoke = false;
+                //iceGreandeLauncher.ammoDisplay.gameObject.SetActive(false);
+
+                currentSelected++;
+                /*
+                for (int i = 0; i < maxSelected; i++)
+                {
+                    objectList[i].gameObject.SetActive(false);
+                }*/
+                if (currentSelected >= maxSelected)
+                {
+                    currentSelected = 0;
+                }
+
+                Invoke("setAct", 0.2f);
+            }
         }
     }
     private void setAct()
     {
-        foreach (GameObject obj in objectList)
+        
+        for (int i = 0; i < maxSelected; i++)
         {
-            obj.SetActive(false);
+            objectList[i].gameObject.SetActive(false);
         }
-        //iceGreandeLauncher.ammoDisplay.gameObject.SetActive(false);
-        objectList[currentSelected].SetActive(true);
-        if (currentSelected == 2)
-        {
-            //iceGreandeLauncher.ammoDisplay.gameObject.SetActive(true);
-        }
+        objectList[currentSelected].gameObject.SetActive(true);
         allowInvoke = true;
+    }
+    public void unlockWeapon(int type)
+    {
+        if (maxSelected >= total)
+        {
+            return;
+        }
+        switch (type)
+        {
+            case 1:
+                objectList[maxSelected] = grappleGun;
+                maxSelected++;
+                break;
+            case 2:
+                objectList[maxSelected] = flameThrower;
+                maxSelected++;
+                break;
+            case 3:
+                objectList[maxSelected] = iceGreandeLauncher;
+                maxSelected++;
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            default:
+                return;
+        }
     }
 }
