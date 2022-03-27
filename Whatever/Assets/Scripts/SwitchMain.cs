@@ -2,18 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchSidearm : MonoBehaviour
+public class SwitchMain : MonoBehaviour
 {
-    [SerializeField] private Sidearm grappleGun;
-    [SerializeField] private Sidearm flameThrower;
-    [SerializeField] private Sidearm iceGreandeLauncher;
+    [SerializeField] private MainArm rocketLauncher;
 
     [SerializeField] private int currentSelected = 0;
-    [SerializeField] private int maxSelected = 3;
+    [SerializeField] private int maxSelected = 1;
     [SerializeField] private int total = 6;
-    [SerializeField] private KeyCode swapKey = KeyCode.Q;
+    //[SerializeField] private KeyCode swapKey = KeyCode.Q;
 
-    private Sidearm[] objectList;
+    private MainArm[] objectList;
     private bool allowInvoke = true;
 
     //public KeyCode debugKey = KeyCode.Z;
@@ -21,16 +19,13 @@ public class SwitchSidearm : MonoBehaviour
 
     private void Start()
     {
-        objectList = new Sidearm[total];
-        objectList[0] = grappleGun;
-        objectList[1] = flameThrower;
-        objectList[2] = iceGreandeLauncher;
+        objectList = new MainArm[total];
+        objectList[0] = rocketLauncher;
         currentSelected = 0;
-        for(int i = 0; i < maxSelected; i++)
+        for (int i = 0; i < maxSelected; i++)
         {
             objectList[i].gameObject.SetActive(false);
         }
-        //iceGreandeLauncher.ammoDisplay.gameObject.SetActive(false);
         objectList[currentSelected].gameObject.SetActive(true);
     }
 
@@ -49,24 +44,31 @@ public class SwitchSidearm : MonoBehaviour
             unlockWeapon(3);
             Invoke("setAct", 0.2f);
         } 
-        else*/ if (Input.GetKeyDown(swapKey) && allowInvoke)
+        else*/
+        if (Input.mouseScrollDelta.y < 0 && allowInvoke)
         {
             if (maxSelected > 1)
             {
                 allowInvoke = false;
-                //iceGreandeLauncher.ammoDisplay.gameObject.SetActive(false);
-                objectList[currentSelected].switchOff();
-                currentSelected++;
-                for (int i = 0; i < maxSelected; i++)
+                currentSelected--;
+                if (currentSelected < 0)
                 {
-                    objectList[i].gameObject.SetActive(false);
+                    currentSelected = maxSelected - 1;
                 }
-                
+
+                Invoke("setAct", 0.2f);
+            }
+        }
+        else if (Input.mouseScrollDelta.y < 0 && allowInvoke)
+        {
+            if (maxSelected > 1)
+            {
+                allowInvoke = false;
+                currentSelected++;
                 if (currentSelected >= maxSelected)
                 {
                     currentSelected = 0;
                 }
-                objectList[currentSelected].gameObject.SetActive(true);
 
                 Invoke("setAct", 0.2f);
             }
@@ -74,7 +76,7 @@ public class SwitchSidearm : MonoBehaviour
     }
     private void setAct()
     {
-        
+
         for (int i = 0; i < maxSelected; i++)
         {
             objectList[i].gameObject.SetActive(false);
@@ -100,16 +102,12 @@ public class SwitchSidearm : MonoBehaviour
         switch (type)
         {
             case 1:
-                objectList[maxSelected] = grappleGun;
+                objectList[maxSelected] = rocketLauncher;
                 maxSelected++;
                 break;
             case 2:
-                objectList[maxSelected] = flameThrower;
-                maxSelected++;
                 break;
             case 3:
-                objectList[maxSelected] = iceGreandeLauncher;
-                maxSelected++;
                 break;
             case 4:
                 break;
