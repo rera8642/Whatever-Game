@@ -7,7 +7,9 @@ public class Sidearm : MonoBehaviour
     [SerializeField] private GrapplingGun grappleGun;
     [SerializeField] private FlameThrower flameThrower;
     [SerializeField] private Gun iceGreandeLauncher;
-    public int type = 1;
+    [SerializeField] private Gun handCannon;
+    [SerializeField] private Gun axe;
+    public int type = 5;
 
     public void switchOff()
     {
@@ -19,6 +21,7 @@ public class Sidearm : MonoBehaviour
                     return;
                 }
                 grappleGun.StopGrapple();
+                grappleGun.SetWhite();
                 break;
             case 2:
                 if (!flameThrower)

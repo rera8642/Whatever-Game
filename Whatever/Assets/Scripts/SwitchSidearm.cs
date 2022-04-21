@@ -7,9 +7,11 @@ public class SwitchSidearm : MonoBehaviour
     [SerializeField] private Sidearm grappleGun;
     [SerializeField] private Sidearm flameThrower;
     [SerializeField] private Sidearm iceGreandeLauncher;
+    [SerializeField] private Sidearm handCannon;
+    [SerializeField] private Sidearm axe;
 
     [SerializeField] private int currentSelected = 0;
-    [SerializeField] private int maxSelected = 3;
+    [SerializeField] private int maxSelected = 5;
     [SerializeField] private int total = 6;
     [SerializeField] private KeyCode swapKey = KeyCode.Q;
 
@@ -25,6 +27,8 @@ public class SwitchSidearm : MonoBehaviour
         objectList[0] = grappleGun;
         objectList[1] = flameThrower;
         objectList[2] = iceGreandeLauncher;
+        objectList[3] = handCannon;
+        objectList[4] = axe;
         currentSelected = 0;
         for(int i = 0; i < maxSelected; i++)
         {

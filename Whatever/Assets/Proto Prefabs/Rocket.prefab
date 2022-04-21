@@ -130,7 +130,7 @@ MonoBehaviour:
   explosion: {fileID: 1660081174264638452, guid: a47f8a38770542043ae3becfbd7cb566, type: 3}
   enemyMask:
     serializedVersion: 2
-    m_Bits: 2112
+    m_Bits: 6208
   reactMask:
     serializedVersion: 2
     m_Bits: 0

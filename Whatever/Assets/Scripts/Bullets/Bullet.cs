@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rocket : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject explosion;
@@ -15,7 +15,7 @@ public class Rocket : MonoBehaviour
 
     [SerializeField] private float maxLifetime;
 
-
+    public GameObject point;
 
     public bool explodeOnTouch = true;
     public int explosionDamage;
@@ -25,8 +25,12 @@ public class Rocket : MonoBehaviour
     private bool alive = true;
     PhysicMaterial physics_mat;
 
+    public float maxTime = 10;
+    private float timer;
+
     private void Start()
     {
+        timer = maxTime;
         Setup();
     }
 
@@ -39,6 +43,14 @@ public class Rocket : MonoBehaviour
             Explode();
             alive = false;
         }
+        /*
+        timer--;
+        if (timer <= 0)
+        {
+            Instantiate(point, transform.position, Quaternion.identity);
+            timer = maxTime;
+        }*/
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -49,8 +61,27 @@ public class Rocket : MonoBehaviour
             alive = false;
         }
     }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (alive)
+        {
+            Explode();
+            alive = false;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (alive)
+        {
+            Explode();
+            alive = false;
+        }
+    }
+
     private void Explode()
     {
+        Instantiate(point, transform.position, Quaternion.identity);
         if (explosion != null)
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
