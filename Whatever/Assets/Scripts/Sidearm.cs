@@ -7,7 +7,7 @@ public class Sidearm : MonoBehaviour
     [SerializeField] private GrapplingGun grappleGun;
     [SerializeField] private FlameThrower flameThrower;
     [SerializeField] private Gun iceGreandeLauncher;
-    [SerializeField] private Gun handCannon;
+    [SerializeField] private HitscanBullet handCannon;
     [SerializeField] private Gun axe;
     public int type = 5;
 

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public float recoil = 0;
+    public float minRecoilTime = 0;
+    public float recoilTime = 0;
     [SerializeField] private float sensX = 180f;
     [SerializeField] private float sensY = 180f;
     [Space]
@@ -32,11 +35,23 @@ public class CameraController : MonoBehaviour
 
         yRot += mouseX * sensX * multiplier;
         xRot -= mouseY * sensY * multiplier;
+        xRot += recoil;
 
         xRot = Mathf.Clamp(xRot, -90f, 90f);
 
         mainCam.transform.rotation = Quaternion.Euler(xRot, yRot, wallRun.tilt);
 
         orientation.transform.rotation = Quaternion.Euler(0f, yRot, 0f);
+        if (minRecoilTime < recoilTime) 
+        {
+            minRecoilTime += Time.deltaTime;
+            recoil = Mathf.Lerp(recoil, 0, minRecoilTime/recoilTime);
+            //Debug.Log(minRecoilTime);
+        } else
+        {
+            recoil = 0;
+            minRecoilTime = 0;
+            recoilTime = 0;
+        }
     }
 }

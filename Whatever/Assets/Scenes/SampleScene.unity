@@ -8530,25 +8530,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1501039280}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6895d665c4979554ebc2499b1bceb309, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c306c6f5ae4a624499e05530d691dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 2130324498830005821, guid: 362f1468e1ad2884b8ec153c46cb9e15, type: 3}
+  sphere: {fileID: 8397806982285524479, guid: a0052cd49e2244f418f8d1803404fa5f, type: 3}
   muzzleFlash: {fileID: 0}
   ammoDisplay: {fileID: 1969308064}
   fpsCam: {fileID: 963194227}
+  cam: {fileID: 1856336348}
   attackPoint: {fileID: 2109569267}
   orientation: {fileID: 349852774}
   playerBody: {fileID: 1856336342}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 2048
   recoilForce: 10
   allowInvoke: 1
+  knockback: 1
+  explosionForce: 1000
+  explosionRange: 1
+  range: 100
   shootForce: 100
   verticalForce: 0
   timeBetweenShooting: 0
   spread: 0
   reloadTime: 2
   timeBetweenShots: 0
-  magSize: 1
+  magSize: 5
   bulletsPerTap: 1
   allowButtonHold: 0
   mouseButton: 1
@@ -10420,6 +10428,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7fb847a3ecbd44497ac1e61ae7c5bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recoil: 0
+  minRecoilTime: 0
+  recoilTime: 0
   sensX: 180
   sensY: 180
   mainCam: {fileID: 596398870}
