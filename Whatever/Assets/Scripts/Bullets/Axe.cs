@@ -33,7 +33,9 @@ public class Axe : MonoBehaviour
     private GameObject vis;
     private Quaternion initRot;
     private Vector3[] lastPos;
+    private Quaternion[] lastRot;
     private int posC;
+    private int rotC;
     private bool connected = false;
     public GameObject sph;
 
@@ -99,10 +101,10 @@ public class Axe : MonoBehaviour
         {
             connected = true;
             RaycastHit hit;
-            Vector3 dir = (transform.position - lastPos[posC]).normalized;
+            Vector3 dir = (collision.GetContact(0).point - lastPos[posC]).normalized;
             //Vector3 end = transform.position + transform.forward * 2f;
             
-            if (Physics.Raycast(lastPos[posC],dir,out hit, 5f, reactMask))
+            if (Physics.Raycast(lastPos[posC],dir,out hit, 2f, reactMask))
             {
                 
                 Physics.IgnoreCollision(coll, collision.collider);
@@ -111,6 +113,7 @@ public class Axe : MonoBehaviour
                 vis.transform.SetParent(null);
                 vis.transform.position = hit.point;
                 vis.transform.forward = transform.forward;
+                Vector3 endDir = (hit.point - lastPos[posC]).normalized;
                 vis.transform.rotation = initRot;
                 if (hit.collider.gameObject.GetComponent<Rigidbody>())
                 {
@@ -167,7 +170,7 @@ public class Axe : MonoBehaviour
         physics_mat.frictionCombine = PhysicMaterialCombine.Minimum;
         physics_mat.bounceCombine = PhysicMaterialCombine.Maximum;
 
-        GetComponent<SphereCollider>().material = physics_mat;
+        coll.material = physics_mat;
 
         rb.useGravity = useGravity;
         float turn = Input.GetAxis("Horizontal");

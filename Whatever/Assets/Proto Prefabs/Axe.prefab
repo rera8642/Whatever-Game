@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 778348995888976927}
   - component: {fileID: 4715352207496159620}
   - component: {fileID: 8425781846736496460}
-  - component: {fileID: 904555788138423766}
+  - component: {fileID: 2955090679664490903}
   m_Layer: 13
   m_Name: Axe
   m_TagString: Untagged
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4715352207496159620}
-  coll: {fileID: 904555788138423766}
+  coll: {fileID: 2955090679664490903}
   explosion: {fileID: 0}
   visual: {fileID: 3408681092286302203, guid: cee0dff975ac611419b2b8799fa12f89, type: 3}
   enemyMask:
@@ -134,8 +134,8 @@ MonoBehaviour:
   explosionForce: 0
   maxTime: 10
   sph: {fileID: 8397806982285524479, guid: a0052cd49e2244f418f8d1803404fa5f, type: 3}
---- !u!135 &904555788138423766
-SphereCollider:
+--- !u!136 &2955090679664490903
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -144,9 +144,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0.39, z: 1}
+  m_Radius: 4
+  m_Height: 1.3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.1, z: 0.5}
 --- !u!1 &7693378667948959358
 GameObject:
   m_ObjectHideFlags: 0
