@@ -5,11 +5,12 @@ using UnityEngine;
 public class SwitchMain : MonoBehaviour
 {
     [SerializeField] private MainArm rocketLauncher;
+    [SerializeField] private MainArm crossBow;
 
     [SerializeField] private int currentSelected = 0;
-    [SerializeField] private int maxSelected = 1;
+    [SerializeField] private int maxSelected = 2;
     [SerializeField] private int total = 6;
-    //[SerializeField] private KeyCode swapKey = KeyCode.Q;
+    //[SerializeField] private KeyCode swapKey = KeyCode.E;
 
     private MainArm[] objectList;
     private bool allowInvoke = true;
@@ -21,6 +22,7 @@ public class SwitchMain : MonoBehaviour
     {
         objectList = new MainArm[total];
         objectList[0] = rocketLauncher;
+        objectList[1] = crossBow;
         currentSelected = 0;
         for (int i = 0; i < maxSelected; i++)
         {
@@ -59,7 +61,7 @@ public class SwitchMain : MonoBehaviour
                 Invoke("setAct", 0.2f);
             }
         }
-        else if (Input.mouseScrollDelta.y < 0 && allowInvoke)
+        else if (Input.mouseScrollDelta.y > 0 && allowInvoke)
         {
             if (maxSelected > 1)
             {

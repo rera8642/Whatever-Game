@@ -5,6 +5,7 @@ using UnityEngine;
 public class MainArm : MonoBehaviour
 {
     [SerializeField] private Gun rocketLauncher;
+    [SerializeField] private Gun crossbow;
     public int type = 1;
 
     public void switchOff()
@@ -19,6 +20,10 @@ public class MainArm : MonoBehaviour
                 
                 break;
             case 2:
+                if (!crossbow)
+                {
+                    return;
+                }
                 break;
             case 3:
                 break;
