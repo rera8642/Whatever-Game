@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject explosion;
     [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private LayerMask physMask;
     [SerializeField] private LayerMask reactMask;
 
     [Range(0f, 1f)] [SerializeField] private float bounciness;
@@ -87,14 +88,19 @@ public class Bullet : MonoBehaviour
             Instantiate(explosion, transform.position, Quaternion.identity);
         }
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, enemyMask);
-
+        Collider[] reactors  = Physics.OverlapSphere(transform.position, explosionRange, physMask);
         for (int i = 0; i < enemies.Length; i++)
         {
             // Take Damage
+            
+        }
+        for (int i = 0; i < reactors.Length; i++)
+        {
+            // Take Damage
 
-            if (enemies[i].GetComponent<Rigidbody>())
+            if (reactors[i].GetComponent<Rigidbody>())
             {
-                enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
+                reactors[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
             }
         }
 

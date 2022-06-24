@@ -8,8 +8,12 @@ public class GrapplingGun : MonoBehaviour
 {
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private GameObject img;
+    [SerializeField] private LayerMask physMask;
+
     [SerializeField] private float maxDistance = 100f;
     [SerializeField] private float minDistance = 1f;
+    [SerializeField] private float sendForce = 10f;
+
 
     public LayerMask grappleSurface;
     public Transform gunTip;
@@ -19,7 +23,9 @@ public class GrapplingGun : MonoBehaviour
     private Vector3 grapplePoint;
     public SpringJoint joint;
     public TextMeshProUGUI ammoDisplay;
-
+    public bool attachedToPhys = false;
+    private Rigidbody connectedBody;
+    private float dist;
 
     private void Update()
     {
@@ -57,6 +63,7 @@ public class GrapplingGun : MonoBehaviour
         if (Physics.Raycast(cam.position, cam.forward, out hit, maxDistance))
         {
             float distancefromPoint = Vector3.Distance(player.position, hit.point);
+            dist = distancefromPoint;
             if (distancefromPoint < minDistance)
             {
                 return;
@@ -74,6 +81,15 @@ public class GrapplingGun : MonoBehaviour
             joint.massScale = 4.5f;
 
             lineRenderer.positionCount = 2;
+            if (physMask == (physMask | (1 << hit.collider.gameObject.layer)))
+            {
+                attachedToPhys = true;
+                Rigidbody crb = hit.collider.gameObject.GetComponent<Rigidbody>();
+                if (crb != null)
+                {
+                    connectedBody = crb;
+                }
+            }
         }
     }
 
@@ -86,7 +102,15 @@ public class GrapplingGun : MonoBehaviour
         lineRenderer.SetPosition(0, gunTip.position);
         lineRenderer.SetPosition(1, grapplePoint);
     }
-
+    public void GrappleSend(Vector3 pos)
+    {
+        if (connectedBody != null)
+        {
+            Vector3 dir = (pos - connectedBody.transform.position).normalized;
+            connectedBody.AddForce(dir * sendForce * dist/10, ForceMode.Impulse);
+        }
+        StopGrapple();
+    }
     public void StopGrapple()
     {
         lineRenderer.positionCount = 0;
@@ -94,6 +118,9 @@ public class GrapplingGun : MonoBehaviour
         {
             Destroy(joint);
         }
+        attachedToPhys = false;
+        connectedBody = null;
+        dist = 0;
     }
 
     public void SetWhite()

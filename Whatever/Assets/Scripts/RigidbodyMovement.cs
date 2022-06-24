@@ -61,8 +61,14 @@ public class RigidbodyMovement : MonoBehaviour
         {
             if (grappleGun.IsGrappling())
             {
-                GrappleJump();
-                grappleGun.StopGrapple();
+                if (grappleGun.attachedToPhys)
+                {
+                    grappleGun.GrappleSend(transform.position);
+                } else
+                {
+                    GrappleJump();
+                    grappleGun.StopGrapple();
+                }
             } else if (grounded)
             {
                 Jump();

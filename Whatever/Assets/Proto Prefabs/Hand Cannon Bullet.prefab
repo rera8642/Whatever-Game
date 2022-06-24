@@ -130,6 +130,9 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 2048
+  physMask:
+    serializedVersion: 2
+    m_Bits: 34816
   reactMask:
     serializedVersion: 2
     m_Bits: 6208

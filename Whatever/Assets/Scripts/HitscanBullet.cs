@@ -16,6 +16,7 @@ public class HitscanBullet : MonoBehaviour
 
     public Rigidbody playerBody;
     public LayerMask enemyMask;
+    public LayerMask physMask;
     public float recoilForce;
 
     public bool allowInvoke = true;
@@ -95,7 +96,7 @@ public class HitscanBullet : MonoBehaviour
         readyToShoot = false;
         RaycastHit hit;
 
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range, enemyMask)) {
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range, physMask)) {
             if (knockback)
             {
                 Instantiate(sphere, hit.point, Quaternion.identity);

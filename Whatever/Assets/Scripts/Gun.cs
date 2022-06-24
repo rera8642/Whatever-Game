@@ -10,11 +10,15 @@ public class Gun : MonoBehaviour
     public TextMeshProUGUI ammoDisplay;
 
     public Camera fpsCam;
+    public CameraController cam;
     public Transform attackPoint;
     public Transform orientation;
 
     public Rigidbody playerBody;
     public float recoilForce;
+    public float recoilCam;
+    public float recoilTime;
+    public bool hasCamRecoil = false;
 
     public bool allowInvoke = true;
 
@@ -52,7 +56,7 @@ public class Gun : MonoBehaviour
 
         if (ammoDisplay != null)
         {
-            ammoDisplay.SetText(bulletsLeft / bulletsPerTap + " / " + magSize / bulletsPerTap);
+            ammoDisplay.SetText(bulletsLeft + " / " + magSize);
         }
     }
     private void MyInput()
@@ -122,12 +126,18 @@ public class Gun : MonoBehaviour
 
         bulletsLeft--;
         bulletsShot++;
-
+        if (hasCamRecoil)
+        {
+            cam.recoil = recoilCam;
+            cam.recoilTime = recoilTime;
+            cam.minRecoilTime = 0;
+        }
         if (allowInvoke)
         {
             Invoke("ResetShot", timeBetweenShooting);
             allowInvoke = false;
             playerBody.AddForce(-directionWithSpread.normalized * recoilForce, ForceMode.Impulse);
+            
         }
 
         if (bulletsShot < bulletsPerTap && bulletsLeft > 0)
