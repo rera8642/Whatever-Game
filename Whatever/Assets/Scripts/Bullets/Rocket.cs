@@ -62,6 +62,7 @@ public class Rocket : MonoBehaviour
         for (int i = 0; i < enemies.Length; i++)
         {
             // Take Damage
+            enemies[i].GetComponent<BasicEnemy>().Kill();
         }
 
         for (int i = 0; i < reactors.Length; i++)

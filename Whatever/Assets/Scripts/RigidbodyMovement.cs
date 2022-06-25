@@ -64,7 +64,10 @@ public class RigidbodyMovement : MonoBehaviour
                 if (grappleGun.attachedToPhys)
                 {
                     grappleGun.GrappleSend(transform.position);
-                } else
+                } else if (grappleGun.attachedToEnemy)
+                {
+                    grappleGun.GrappleEnemy(transform.position);
+                } else 
                 {
                     GrappleJump();
                     grappleGun.StopGrapple();

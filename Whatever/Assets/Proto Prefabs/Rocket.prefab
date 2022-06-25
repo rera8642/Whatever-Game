@@ -130,10 +130,10 @@ MonoBehaviour:
   explosion: {fileID: 1660081174264638452, guid: a47f8a38770542043ae3becfbd7cb566, type: 3}
   enemyMask:
     serializedVersion: 2
-    m_Bits: 6208
+    m_Bits: 2048
   physMask:
     serializedVersion: 2
-    m_Bits: 34816
+    m_Bits: 100352
   reactMask:
     serializedVersion: 2
     m_Bits: 0
@@ -142,8 +142,8 @@ MonoBehaviour:
   explosionRange: 4
   maxLifetime: 3
   explodeOnTouch: 1
-  explosionDamage: 50
-  explosionForce: 1000
+  explosionDamage: 200
+  explosionForce: 2000
 --- !u!96 &4075928275048159316
 TrailRenderer:
   serializedVersion: 2

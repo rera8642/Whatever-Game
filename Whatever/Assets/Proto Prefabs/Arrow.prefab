@@ -204,7 +204,7 @@ MonoBehaviour:
     m_Bits: 2048
   reactMask:
     serializedVersion: 2
-    m_Bits: 6208
+    m_Bits: 104512
   bounciness: 0
   useGravity: 0
   explosionRange: 0

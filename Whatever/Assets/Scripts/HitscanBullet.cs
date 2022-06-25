@@ -101,6 +101,10 @@ public class HitscanBullet : MonoBehaviour
             {
                 Instantiate(sphere, hit.point, Quaternion.identity);
                 hit.rigidbody.AddExplosionForce(explosionForce, hit.point, explosionRange);
+                if (hit.collider.gameObject.GetComponent<BasicEnemy>())
+                {
+                    hit.collider.gameObject.GetComponent<BasicEnemy>().Kill();
+                }
             }
             
         }

@@ -120,6 +120,10 @@ public class Axe : MonoBehaviour
                     vis.GetComponent<AxeVisual>().connectedRB = hit.collider.gameObject.GetComponent<Rigidbody>();
                 }
                 vis.GetComponent<AxeVisual>().endPos = hit.point;
+                if (collision.gameObject.GetComponent<BasicEnemy>())
+                {
+                    collision.gameObject.GetComponent<BasicEnemy>().Kill();
+                }
                 Invoke("Delay", .2f);
                 allowInvoke = false;
                 Destroy(gameObject);

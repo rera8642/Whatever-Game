@@ -92,7 +92,8 @@ public class Bullet : MonoBehaviour
         for (int i = 0; i < enemies.Length; i++)
         {
             // Take Damage
-            
+            enemies[i].gameObject.GetComponent<BasicEnemy>().Kill();
+
         }
         for (int i = 0; i < reactors.Length; i++)
         {

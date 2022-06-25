@@ -119,10 +119,10 @@ MonoBehaviour:
   visual: {fileID: 3408681092286302203, guid: cee0dff975ac611419b2b8799fa12f89, type: 3}
   enemyMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   reactMask:
     serializedVersion: 2
-    m_Bits: 6209
+    m_Bits: 104513
   bounciness: 0
   useGravity: 1
   explosionRange: 15

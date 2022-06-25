@@ -128,6 +128,10 @@ public class Arrow : MonoBehaviour
                 {
                     vis.GetComponent<Rigidbody>().detectCollisions = false;
                 }
+                if (collision.gameObject.GetComponent<BasicEnemy>())
+                {
+                    collision.gameObject.GetComponent<BasicEnemy>().Kill();
+                }
                 Invoke("Delay", .2f);
                 allowInvoke = false;
                 Destroy(gameObject);
